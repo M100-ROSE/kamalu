@@ -12,6 +12,11 @@ node_modules/
 dist/
 build/
 *.log
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.eslintcache
 
 # Sistema
 Thumbs.db

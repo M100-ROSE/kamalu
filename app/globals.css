@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme {
+  /* Cores — paleta Manteiga & Vinho */
+  --color-ink: #2b1a14;
+  --color-paper: #fffdf8;
+  --color-butter: #f6e7c8;
+  --color-wine: #5e1b2c;
+  --color-wine-deep: #4a1423;
+  --color-caramel: #c08552;
+  --color-magenta: #e6186b;
+  --color-line: #e0cda9;
+
+  /* Tipografia */
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-karla), "Helvetica Neue", Arial, sans-serif;
+
+  --text-display-xl: clamp(2.5rem, 6vw, 3.5rem);
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--letter-spacing: -0.02em;
+
+  --text-display-lg: clamp(1.75rem, 3.4vw, 2rem);
+  --text-display-lg--line-height: 1.15;
+  --text-display-lg--letter-spacing: -0.01em;
+
+  --text-display-md: clamp(1.125rem, 1.8vw, 1.375rem);
+  --text-display-md--line-height: 1.3;
+
+  --text-body-lg: 1.0625rem;
+  --text-body-lg--line-height: 1.6;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.06em;
+
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.16em;
+  --text-label--font-weight: 700;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-magenta);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-butter);
+    color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* Logo — só sobre espresso (spec §1) */
+  .logo-plate {
+    background: #2b1a14;
+    isolation: isolate;
+  }
+
+  .logo-plate img {
+    filter: grayscale(1) sepia(1) brightness(2.9) saturate(0.6);
+    mix-blend-mode: screen;
+  }
+
+  /* Recortes sem PNG (spec §1) */
+  .crop {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .crop img {
+    position: absolute;
+    max-width: none;
+    height: auto;
+  }
+
+  .crop-logo {
+    aspect-ratio: 248 / 215;
+  }
+
+  .crop-logo img {
+    width: 201.6%;
+    left: -47.2%;
+    top: -62.8%;
+  }
+
+  .crop-icon {
+    aspect-ratio: 280 / 83;
+  }
+
+  .crop-icon img {
+    width: 178.6%;
+    left: -27.5%;
+    top: -130.1%;
+  }
+
+  /* Etiqueta do ícone — Opção A aprovada (spec §1) */
+  .etiqueta-icone {
+    display: inline-flex;
+    align-items: center;
+    background: #2b1a14;
+    border: 1px solid rgba(246, 231, 200, 0.22);
+    border-radius: 999px;
+    padding: 3px 14px;
+  }
+
+  .etiqueta-icone img {
+    mix-blend-mode: screen;
+    filter: brightness(1.08);
+  }
+
+  @media (max-width: 767px) {
+    .etiqueta-icone {
+      padding: 2px 10px;
+    }
+  }
+
+  /* Patterns (spec §5) */
+  .pattern-papel {
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgba(43, 26, 20, 0.05) 0 1px,
+      transparent 1px 12px
+    );
+  }
+
+  .pattern-arcos {
+    background-image: repeating-radial-gradient(
+      circle at 50% 120%,
+      transparent 0 39px,
+      rgba(192, 133, 82, 0.18) 40px 41px
+    );
+  }
+
+  .pattern-pontos {
+    background-image: radial-gradient(
+      rgba(246, 231, 200, 0.1) 1px,
+      transparent 1px
+    );
+    background-size: 16px 16px;
+  }
+
+  /* Reveal (spec §6) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 480ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 480ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  .reveal[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      transform: none;
+      transition: opacity 480ms linear;
+    }
+  }
+
+  /* Link com sublinhado progressivo (spec §5 e §6) */
+  .link-sublinhado {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 1px;
+    padding-bottom: 3px;
+    transition:
+      background-size 200ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 200ms;
+  }
+
+  .link-sublinhado:hover,
+  .link-sublinhado:focus-visible {
+    background-size: 100% 2px;
+  }
+}
