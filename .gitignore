@@ -1,0 +1,19 @@
+# Configuração local de agentes/IDE — não versionar
+.opencode/
+
+# Segredos e ambiente
+.env
+.env.*
+*.key
+*.pem
+
+# Dependências e artefatos
+node_modules/
+dist/
+build/
+*.log
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
