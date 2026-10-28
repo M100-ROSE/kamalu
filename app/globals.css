@@ -106,37 +106,6 @@
     top: -62.8%;
   }
 
-  .crop-icon {
-    aspect-ratio: 280 / 83;
-  }
-
-  .crop-icon img {
-    width: 178.6%;
-    left: -27.5%;
-    top: -130.1%;
-  }
-
-  /* Etiqueta do ícone — Opção A aprovada (spec §1) */
-  .etiqueta-icone {
-    display: inline-flex;
-    align-items: center;
-    background: #2b1a14;
-    border: 1px solid rgba(246, 231, 200, 0.22);
-    border-radius: 999px;
-    padding: 3px 14px;
-  }
-
-  .etiqueta-icone img {
-    mix-blend-mode: screen;
-    filter: brightness(1.08);
-  }
-
-  @media (max-width: 767px) {
-    .etiqueta-icone {
-      padding: 2px 10px;
-    }
-  }
-
   /* Patterns (spec §5) */
   .pattern-papel {
     background-image: repeating-linear-gradient(

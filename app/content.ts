@@ -1,8 +1,11 @@
+import type { TipoIlustracao } from "./components/IlustracaoProduto";
+
 export type Produto = {
   numero: string;
   titulo: string;
   descricao: string;
   url: string;
+  ilustracao: TipoIlustracao;
 };
 
 export type ItemDiferenca = {
@@ -44,7 +47,7 @@ export const hero = {
   ctaPrimario: "Encomendar no WhatsApp",
   ctaSecundario: "Ver produtos",
   fatos: [
-    "Encomenda até quinta",
+    "Encomenda em qualquer dia",
     "Retirada combinada",
     "Atendimento direto com a Janaína",
   ],
@@ -62,9 +65,9 @@ export const sobre = {
 
 export const produtos = {
   label: "O QUE SAI DA COZINHA",
-  titulo: "Quatro coisas, feitas bem.",
+  titulo: "Da festa ao café da tarde.",
   apoio:
-    "Cento, meio cento, 20 ou 25 cm. Você escolhe a quantidade; a gente acerta a medida.",
+    "Cento, meio cento, 20 ou 25 cm. Oito linhas, o mesmo peso na balança e o mesmo forno às 6h.",
   ctaCard: "Pedir pelo WhatsApp",
   itens: [
     {
@@ -73,6 +76,7 @@ export const produtos = {
       descricao:
         "Coxinha, risole, empada e mini pastel — casquinha fina, recheio até a borda.",
       url: "https://wa.me/5542999816629?text=Ol%C3%A1%2C%20Jana%C3%ADna!%20Quero%20encomendar%20salgados%20de%20festa.%20Pode%20me%20passar%20os%20sabores%20e%20o%20pre%C3%A7o%20do%20cento%3F",
+      ilustracao: "salgados",
     },
     {
       numero: "02",
@@ -80,6 +84,7 @@ export const produtos = {
       descricao:
         "De corte e de festa — cenoura com ganache, formigueiro, red velvet.",
       url: "https://wa.me/5542999816629?text=Ol%C3%A1%2C%20Jana%C3%ADna!%20Quero%20encomendar%20um%20bolo.%20Pode%20me%20contar%20os%20tamanhos%20e%20recheios%3F",
+      ilustracao: "bolos",
     },
     {
       numero: "03",
@@ -87,6 +92,7 @@ export const produtos = {
       descricao:
         "Brigadeiro, beijinho, cajuzinho e bicho de pé. Cento com até 4 sabores.",
       url: "https://wa.me/5542999816629?text=Ol%C3%A1%2C%20Jana%C3%ADna!%20Quero%20encomendar%20docinhos%20de%20bandeja.%20Quais%20sabores%20est%C3%A3o%20dispon%C3%ADveis%3F",
+      ilustracao: "docinhos",
     },
     {
       numero: "04",
@@ -94,6 +100,36 @@ export const produtos = {
       descricao:
         "Limão, cheesecake de frutas vermelhas, maçã e holandesa. Gelada ou assada.",
       url: "https://wa.me/5542999816629?text=Ol%C3%A1%2C%20Jana%C3%ADna!%20Quero%20encomendar%20uma%20torta.%20Pode%20me%20passar%20as%20op%C3%A7%C3%B5es%20e%20o%20prazo%3F",
+      ilustracao: "tortas",
+    },
+    {
+      numero: "05",
+      titulo: "Pão de queijo",
+      descricao: "Pão de queijo, chipa, recheado e rosquinha de polvilho.",
+      url: "https://wa.me/5542999816629?text=Ol%C3%A1%2C%20Jana%C3%ADna!%20Quero%20encomendar%20p%C3%A3o%20de%20queijo.%20Pode%20me%20contar%20as%20quantidades%20e%20o%20prazo%3F",
+      ilustracao: "paoDeQueijo",
+    },
+    {
+      numero: "06",
+      titulo: "Pães caseiros",
+      descricao: "Pão francês, bisnaga, pão de forma e brioche de manteiga.",
+      url: "https://wa.me/5542999816629?text=Ol%C3%A1%2C%20Jana%C3%ADna!%20Quero%20encomendar%20p%C3%A3es%20caseiros.%20Quais%20tipos%20saem%20no%20dia%3F",
+      ilustracao: "paes",
+    },
+    {
+      numero: "07",
+      titulo: "Cucas",
+      descricao:
+        "Banana, maçã, nata e goiabada — massa macia, farofa fina.",
+      url: "https://wa.me/5542999816629?text=Ol%C3%A1%2C%20Jana%C3%ADna!%20Quero%20encomendar%20uma%20cuca.%20Quais%20recheios%20voc%C3%AAs%20fazem%3F",
+      ilustracao: "cucas",
+    },
+    {
+      numero: "08",
+      titulo: "Kits e caixas",
+      descricao: "Bolo, 20 salgados, 20 docinhos e pães — caixa fechada.",
+      url: "https://wa.me/5542999816629?text=Ol%C3%A1%2C%20Jana%C3%ADna!%20Quero%20montar%20um%20kit%20de%20caf%C3%A9%20da%20tarde.%20O%20que%20voc%C3%AAs%20incluem%3F",
+      ilustracao: "kits",
     },
   ] satisfies Produto[],
 } as const;
@@ -113,9 +149,9 @@ export const diferenciais = {
         "Cento, meio cento, 20 ou 25 cm. O tamanho que cabe na sua mesa.",
     },
     {
-      titulo: "Prazo que se cumpre",
+      titulo: "Data combinada",
       descricao:
-        "Encomenda confirmada até quinta, retirada no sábado de manhã.",
+        "Encomenda feita em qualquer dia. A retirada você combina com a Janaína — e é essa data que vale.",
     },
     {
       titulo: "Chega inteira",
@@ -128,7 +164,7 @@ export const diferenciais = {
 export const comoEncomendar = {
   label: "COMO ENCOMENDAR",
   titulo: "Três passos e está marcado.",
-  nota: "Encomendas com 48h de antecedência. Para festas grandes, feche até quinta.",
+  nota: "Encomendas podem ser feitas em qualquer dia. A data de retirada é combinada com a Janaína; para festas grandes, avise antes para garantir o dia.",
   passos: [
     {
       numero: "01",

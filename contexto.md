@@ -45,8 +45,9 @@ em caixa alta para apoio. Alternativas mapeadas: Cormorant Garamond + Jost; Libr
 
 **Hierarquia logo × ícone:** o monograma "k" caligráfico com o lettering PADARIA/CONFEITARIA
 é o **logo principal e manda na peça** — arquivo fechado, não redesenhar, não recolorir em
-magenta. O ícone do chapéu de chef com fouet magenta é **secundário**: selo, avatar, adesivo,
-aba de caixa. O magenta é tempero, nunca fundo chapado grande.
+magenta. O ícone do chapéu de chef com fouet magenta é **secundário** no briefing impresso
+(selo, avatar, adesivo, aba de caixa); **no site ele foi retirado a pedido do cliente**, e o
+favicon passou a sair do monograma do logo. O magenta é tempero, nunca fundo chapado grande.
 
 **Direção de arte:** luz natural lateral, sombra longa e macia, fundo manteiga ou off-white,
 props de papel-manteiga/cerâmica creme/linho cru, grão fino visível; mãos sim, rosto em close não.
@@ -65,14 +66,13 @@ kamalu/
 │   ├── page.tsx             # One-page + JSON-LD "Bakery"
 │   ├── globals.css          # Tokens da paleta Manteiga & Vinho, tratamentos .logo-plate/.crop/.etiqueta-icone
 │   ├── content.ts           # Todo o texto do site, contato e links de WhatsApp (fonte única)
-│   ├── icon.png             # gerado por scripts/gerar-icones.mjs (512px)
+│   ├── icon.png             # gerado por scripts/gerar-icones.mjs a partir do monograma do logo (512px)
 │   ├── apple-icon.png       # gerado por scripts/gerar-icones.mjs (180px)
-│   └── components/          # Botao, CardProduto, EtiquetaIcone, Hero, Label, Logo, Reveal, Section, Selo
+│   └── components/          # Botao, CardProduto, Hero, IlustracaoProduto, Label, Logo, Reveal, Section, Selo
 ├── public/img/
-│   ├── kamalu-logo.jpg      # cópia do logo para o site
-│   └── kamalu-icone.jpg     # cópia do ícone para o site
+│   └── kamalu-logo.jpg      # cópia do logo para o site
 ├── scripts/
-│   └── gerar-icones.mjs     # recorta o ícone do JPEG preto e gera app/icon.png + app/apple-icon.png
+│   └── gerar-icones.mjs     # recorta o monograma "k" do logo e gera app/icon.png + app/apple-icon.png
 ├── img/                     # ORIGINAIS intocados
 │   ├── WhatsApp Image 2026-10-27 at 21.56.56 (1).jpeg   # Logo: monograma k + PADARIA/CONFEITARIA
 │   └── WhatsApp Image 2026-10-27 at 21.56.56.jpeg       # Ícone: chapéu de chef + fouet magenta
@@ -86,9 +86,11 @@ As imagens são referenciadas no `briefing.md` por caminho relativo (`img/...`).
 ### Site institucional (one-page)
 
 - **Stack:** Next.js 15.5.28 (App Router) + React 19 + TypeScript + Tailwind CSS v4 (`@tailwindcss/postcss`), sem banco, sem CMS, sem carrinho. `sharp` só como devDependency para gerar ícones.
-- **Objetivo único:** levar ao WhatsApp com o pedido já iniciado. Quatro cards de produto, cada um com deep link `wa.me` com mensagem pré-preenchida por categoria.
+- **Objetivo único:** levar ao WhatsApp com o pedido já iniciado. Oito cards de produto (salgados, bolos, docinhos, tortas, pão de queijo, pães caseiros, cucas, kits e caixas), cada um com ilustração SVG própria e deep link `wa.me` com mensagem pré-preenchida por categoria.
 - **Seções:** Hero (fundo espresso) → Sobre → Produtos → Por que Kamalu (fundo espresso) → Como encomendar → CTA final → Footer. Sem header fixo; nav reside no rodapé.
-- **Decisões visuais:** paleta Manteiga & Vinho aplicada em tokens; Fraunces 600/700 + Karla 400/500/700 via `next/font/google`; JPEGs de fundo preto tratados com `mix-blend-mode: screen` (+ filtro no logo) em vez de recorte/PNG; selo do ícone virou pill espresso (`.etiqueta-icone`, raio 999px) em vez de chapa preta; logo sem cast esverdeado (filtro ajustado para `#EDDFC1`).
+- **Decisões visuais:** paleta Manteiga & Vinho aplicada em tokens; Fraunces 600/700 + Karla 400/500/700 via `next/font/google`; JPEG de fundo preto tratado com `mix-blend-mode: screen` (+ filtro no logo) em vez de recorte/PNG; logo sem cast esverdeado (filtro ajustado para `#EDDFC1`). O ícone do chapéu + fouet saiu do site (`EtiquetaIcone` e `public/img/kamalu-icone.jpg` removidos; `.crop-icon`/`.etiqueta-icone` fora do CSS) e o favicon é gerado do monograma "k" do logo.
+- **Ilustração de produto:** `app/components/IlustracaoProduto.tsx` com 8 SVGs inline (viewBox 48×48, área viva 6–42, traço 1.75 `currentColor`, ≤5 elementos), massa caramelo `#C08552` só como detalhe interno em 4 deles, 56/48/44px (lg/md/mobile), decorativas (`aria-hidden`, `focusable="false"`). Grid de produtos 1/2/3/4 colunas.
+- **Regra de encomenda:** não existe mais corte de quinta-feira. "Encomenda em qualquer dia"; a data de retirada é combinada com a Janaína.
 - **Movimento e a11y:** reveal no scroll com fallback em `<noscript>`; contraste conferido, foco visível, `lang="pt-BR"`, textos alternativos.
 - **SEO:** title/description/OpenGraph em `app/layout.tsx`, `themeColor #2B1A14`, JSON-LD `Bakery` com nome e telefone.
 - **Textos:** nenhum placeholder `[CONFIRMAR]` — o que não foi confirmado pelo cliente simplesmente não aparece na tela (ver pendências).
@@ -101,7 +103,7 @@ npm run dev      # desenvolvimento em http://localhost:3000
 npm run build    # build de produção (passa com lint + tipos)
 npm run start    # serve o build
 npm run lint     # eslint .
-npm run icones   # regenera app/icon.png e app/apple-icon.png a partir de public/img/kamalu-icone.jpg
+npm run icones   # regenera app/icon.png e app/apple-icon.png a partir do monograma em public/img/kamalu-logo.jpg
 ```
 
 ## Histórico
@@ -210,6 +212,72 @@ já aprovado, para apresentar a marca e levar o pedido direto ao WhatsApp.
 **Pendências internas:**
 - [ ] Regerar `app/icon.png` e `app/apple-icon.png` (`npm run icones`) quando chegarem os vetores
 - [ ] Substituir as cópias JPEG de `public/img/` por PNG/SVG quando houver arquivo fechado
+
+### 2026-10-28 — Cardápio de 8 itens, ilustrações próprias e encomenda em qualquer dia
+
+**Solicitação original:** o cliente pediu para **tirar a imagem do chapéu de chef com fouet**
+(ícone) do site e **adicionar mais produtos com desenhos simples e bonitos**. No mesmo ciclo,
+informou que **as encomendas podem ser feitas sempre** — não existe mais corte de quinta-feira.
+
+**O que foi feito:**
+1. Day especificou e Anna removeu o ícone do site: componente `EtiquetaIcone` e
+   `public/img/kamalu-icone.jpg` apagados; `.crop-icon` e `.etiqueta-icone` retirados de
+   `app/globals.css`; o lado direito do cabeçalho de Produtos ficou vazio (o vazio é intencional).
+2. O favicon passou a ser gerado do **logo**: `scripts/gerar-icones.mjs` recorta o monograma "k"
+   (x192–303, y135–245), aplica ganho alto, corta o preto do JPEG e tinge de creme `#EDDFC1`,
+   gerando `app/icon.png` (512px) e `app/apple-icon.png` (180px), com conferência a 32/16px.
+3. O cardápio foi de 4 para **8 itens**: entraram Pão de queijo, Pães caseiros, Cucas e Kits e
+   caixas, cada um com descrição e deep link `wa.me` próprios. H2 virou "Da festa ao café da
+   tarde." e o grid passou a 1/2/3/4 colunas (mobile / md / lg / xl).
+4. Criado `app/components/IlustracaoProduto.tsx` com **8 ilustrações SVG inline**: viewBox 48×48,
+   área viva 6–42, traço 1.75 em `currentColor`, no máximo 5 elementos, 56/48/44px (lg/md/mobile),
+   decorativas (`aria-hidden` + `focusable="false"`). O card mostra número e ilustração na mesma linha.
+5. Bebell apontou que a primeira versão das ilustrações virava "mancha marrom" a 32–40px. Day
+   refez a regra de massa e a geometria de 4 desenhos; Anna reimplementou com tamanhos maiores e
+   essas regras ficaram na spec (§4.1):
+   - o caramelo é acento, **nunca preenche a silhueta** nem forma que toque o contorno externo;
+   - só detalhe interno (recheio, creme, andar, tampo), recuado ≥2u de outro traço;
+   - **massa ≤15% do viewBox** (≤345u² de 2304u²; medido: 168/201/96/94u²);
+   - **teste de 1 cor**: apagando o caramelo, o desenho continua legível só pelo traço;
+   - 01, 06, 07 e 08 ficam sem massa; legibilidade garantida a 44px.
+6. A regra de prazo mudou em 3 textos: Hero ("Encomenda em qualquer dia"), diferencial ("Data
+   combinada" — a retirada é combinada com a Janaína) e nota de Como encomendar ("Encomendas
+   podem ser feitas em qualquer dia… para festas grandes, avise antes"). Nenhum "quinta", "48h"
+   ou "sábado" restou na página.
+7. Validação: `npm run build` e `npm run lint` limpos; HTML gerado com 8 SVGs e sem os termos
+   do prazo antigo.
+
+**Arquivos alterados:**
+- `app/content.ts` (alterado: 8 produtos, `ilustracao`, textos de prazo)
+- `app/components/IlustracaoProduto.tsx` (novo)
+- `app/components/CardProduto.tsx` (alterado)
+- `app/components/EtiquetaIcone.tsx` (removido)
+- `app/page.tsx` (alterado: grid 1/2/3/4 colunas, cabeçalho sem etiqueta)
+- `app/globals.css` (alterado: `.crop-icon` e `.etiqueta-icone` removidos)
+- `app/icon.png`, `app/apple-icon.png` (alterados: gerados do logo)
+- `public/img/kamalu-icone.jpg` (removido)
+- `scripts/gerar-icones.mjs` (alterado: recorte do monograma do logo)
+- `design/especificacao-site.md` (alterado: §1, §3.3, §3.4, §3.5, §4, §4.1, §6, §7, §8, §9)
+- `briefing.md` (alterado: tabela "Dizemos / Não dizemos" com a nova regra de prazo)
+- `contexto.md` (alterado)
+
+**Pendências (aguardando cliente):**
+- [ ] Janaína confirmar os 4 produtos novos: **pão de queijo**, **pães caseiros**, **cucas**,
+      **kits e caixas** (nomes, descrições e sabores foram escritos por inferência)
+- [ ] Domínio oficial (e apontamento de DNS)
+- [ ] Endereço e local de retirada
+- [ ] Horário de funcionamento
+- [ ] Instagram (perfil oficial)
+- [ ] CNPJ / razão social para o rodapé e o JSON-LD
+- [ ] `og:image` 1200×630 (hoje o OpenGraph vai sem imagem)
+- [ ] Campos faltantes do JSON-LD `Bakery`: `address`, `openingHoursSpecification`, `url`,
+      `image`, `sameAs` (Instagram), `priceRange`
+- [ ] Vetores AI/SVG do logo — JPEG não serve para grande formato nem para o favicon definitivo
+- [ ] Confirmar se o ícone (chapéu + fouet) continua valendo nas peças impressas, já que saiu do site
+
+**Pendências internas:**
+- [ ] Regerar `app/icon.png` e `app/apple-icon.png` (`npm run icones`) quando chegar o vetor do logo
+- [ ] Revisar as ilustrações em screenshot a 44px no mobile real (não só no build)
 
 ## Modelo para novas entradas
 

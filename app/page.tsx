@@ -1,6 +1,5 @@
 import Botao from "./components/Botao";
 import CardProduto from "./components/CardProduto";
-import EtiquetaIcone from "./components/EtiquetaIcone";
 import Hero from "./components/Hero";
 import Label from "./components/Label";
 import Logo from "./components/Logo";
@@ -77,10 +76,7 @@ export default function Home() {
         {/* Produtos */}
         <Section id="produtos" tom="butter" pattern="papel">
           <Reveal>
-            <div className="flex max-w-[560px] items-center justify-between gap-6">
-              <Label>{produtos.label}</Label>
-              <EtiquetaIcone />
-            </div>
+            <Label>{produtos.label}</Label>
           </Reveal>
 
           <Reveal delay={1}>
@@ -92,11 +88,11 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
             {produtos.itens.map((produto, indice) => (
               <Reveal
                 key={produto.numero}
-                delay={indice}
+                delay={indice % 4}
                 className="h-full"
               >
                 <CardProduto produto={produto} />

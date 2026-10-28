@@ -113,7 +113,7 @@ Pode: selo, avatar, adesivo, aba de caixa, marca d'água; magenta `#E6186B` ou v
 
 | Dizemos | Não dizemos |
 |---|---|
-| "Encomenda até quinta, retirada no sábado de manhã." | "Feito com muito amor e carinho! ❤️" |
+| "Encomenda em qualquer dia; a retirada você combina com a Janaína." | "Feito com muito amor e carinho! ❤️" |
 | "Coxinha de frango desfiado na hora, casquinha fina." | "A melhor coxinha da cidade!!" |
 | "Bolo de cenoura com ganache — o da tarde de domingo." | "Delícia irresistível que vai encantar!" |
 | "Cento de docinho: escolha até 4 sabores." | "Monte sua festa dos sonhos!" |
